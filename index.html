@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Will You Marry Me?</title>
     <meta name="description" content="For the one I love." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Will you marry me? 💍" />
+    <meta property="og:description" content="우리의 순간들을 담은 작은 영화" />
+    <meta property="og:image" content="https://iinow.github.io/wymm/assets/poster.jpg" />
+    <meta property="og:url" content="https://iinow.github.io/wymm/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Will you marry me? 💍" />
+    <meta name="twitter:description" content="우리의 순간들을 담은 작은 영화" />
+    <meta name="twitter:image" content="https://iinow.github.io/wymm/assets/poster.jpg" />
     <style>
       :root {
         --bg1: #0f1020;
@@ -69,11 +78,13 @@
         min-height: 100dvh;
         display: grid;
         place-items: center;
-        padding: 28px;
+        padding: clamp(14px, 3.5vw, 28px);
       }
 
       .card {
-        width: min(920px, 96vw);
+        width: 100%;
+        max-width: 920px;
+        margin-inline: auto;
         background: rgba(255, 255, 255, 0.08);
         border: 1px solid rgba(255, 255, 255, 0.18);
         border-radius: 24px;
@@ -212,6 +223,54 @@
 
       .hidden {
         display: none !important;
+      }
+
+      @media (max-width: 640px) {
+        .hero {
+          padding: 20px 16px 8px;
+        }
+
+        h1 {
+          font-size: clamp(24px, 8.5vw, 34px);
+        }
+
+        .subtitle {
+          font-size: 15px;
+        }
+
+        .video-shell {
+          margin-top: 12px;
+          padding: 8px;
+        }
+
+        video {
+          border-radius: 12px;
+        }
+
+        .footer {
+          padding: 12px 14px 18px;
+        }
+
+        .cta {
+          font-size: clamp(18px, 6vw, 24px);
+        }
+
+        .note {
+          font-size: 12px;
+        }
+
+        .gate-card {
+          width: min(420px, 94vw);
+          padding: 18px;
+        }
+
+        .gate-row {
+          flex-direction: column;
+        }
+
+        .gate button {
+          width: 100%;
+        }
       }
     </style>
   </head>
