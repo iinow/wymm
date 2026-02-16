@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Will You Marry Me?</title>
+    <meta name="description" content="For the one I love." />
+    <style>
+      :root {
+        --bg1: #0f1020;
+        --bg2: #1f1235;
+        --accent: #ff5f9e;
+        --accent2: #ffd0e4;
+        --text: #fff7fb;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 20% 20%, #3e2366 0%, transparent 40%),
+          radial-gradient(circle at 80% 0%, #5d2f7a 0%, transparent 40%),
+          linear-gradient(160deg, var(--bg1), var(--bg2));
+        overflow-x: hidden;
+      }
+
+      .hearts {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+      }
+
+      .heart {
+        position: absolute;
+        bottom: -20px;
+        width: 14px;
+        height: 14px;
+        background: rgba(255, 170, 205, 0.7);
+        transform: rotate(45deg);
+        animation: rise 8s linear infinite;
+      }
+
+      .heart::before,
+      .heart::after {
+        content: "";
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        background: inherit;
+        border-radius: 50%;
+      }
+      .heart::before { left: -7px; }
+      .heart::after { top: -7px; }
+
+      @keyframes rise {
+        0% { transform: translateY(0) rotate(45deg) scale(0.8); opacity: 0; }
+        10% { opacity: 0.8; }
+        100% { transform: translateY(-110vh) rotate(45deg) scale(1.2); opacity: 0; }
+      }
+
+      .wrap {
+        position: relative;
+        z-index: 1;
+        min-height: 100dvh;
+        display: grid;
+        place-items: center;
+        padding: 28px;
+      }
+
+      .card {
+        width: min(920px, 96vw);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 24px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 20px 80px rgba(0,0,0,0.35);
+        overflow: hidden;
+      }
+
+      .hero {
+        padding: 28px 24px 14px;
+        text-align: center;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #ffd6e8;
+      }
+
+      h1 {
+        margin: 10px 0 8px;
+        font-size: clamp(26px, 4vw, 46px);
+        line-height: 1.1;
+      }
+
+      .subtitle {
+        margin: 0;
+        opacity: 0.93;
+        font-size: clamp(15px, 2vw, 20px);
+      }
+
+      .video-shell {
+        margin: 18px auto 0;
+        width: min(860px, 100%);
+        padding: 12px;
+      }
+
+      video {
+        width: 100%;
+        border-radius: 18px;
+        display: block;
+        background: #000;
+        border: 1px solid rgba(255,255,255,0.12);
+      }
+
+      .footer {
+        padding: 16px 20px 26px;
+        text-align: center;
+      }
+
+      .line {
+        margin: 8px auto;
+        width: 180px;
+        height: 2px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, transparent, var(--accent2), transparent);
+      }
+
+      .cta {
+        margin-top: 10px;
+        font-size: clamp(20px, 2.5vw, 28px);
+        font-weight: 700;
+        color: #ffe8f3;
+        text-shadow: 0 4px 16px rgba(255,95,158,0.35);
+      }
+
+      .note {
+        margin-top: 8px;
+        font-size: 13px;
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hearts" aria-hidden="true"></div>
+
+    <main class="wrap">
+      <section class="card">
+        <div class="hero">
+          <div class="eyebrow">for my love</div>
+          <h1>Will you marry me? 💍</h1>
+          <p class="subtitle">우리의 순간들을 담은 작은 영화</p>
+        </div>
+
+        <div class="video-shell">
+          <video controls playsinline preload="metadata" poster="assets/poster.jpg">
+            <source src="assets/proposal.mp4" type="video/mp4" />
+            브라우저가 비디오를 지원하지 않아요.
+          </video>
+        </div>
+
+        <div class="footer">
+          <div class="line"></div>
+          <div class="cta">너와 평생을 함께하고 싶어</div>
+          <div class="note">made with love, by joon</div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const hearts = document.querySelector('.hearts');
+      const count = 24;
+      for (let i = 0; i < count; i++) {
+        const h = document.createElement('span');
+        h.className = 'heart';
+        h.style.left = `${Math.random() * 100}%`;
+        h.style.animationDelay = `${Math.random() * 8}s`;
+        h.style.animationDuration = `${6 + Math.random() * 6}s`;
+        h.style.opacity = `${0.35 + Math.random() * 0.6}`;
+        const size = 8 + Math.random() * 14;
+        h.style.width = `${size}px`;
+        h.style.height = `${size}px`;
+        hearts.appendChild(h);
+      }
+    </script>
+  </body>
+</html>
