@@ -146,12 +146,91 @@
         font-size: 13px;
         opacity: 0.8;
       }
+
+      .gate {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        display: grid;
+        place-items: center;
+        background: rgba(8, 8, 18, 0.92);
+        backdrop-filter: blur(6px);
+      }
+
+      .gate-card {
+        width: min(420px, 92vw);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 18px;
+        padding: 22px;
+        box-shadow: 0 20px 80px rgba(0,0,0,0.45);
+      }
+
+      .gate h2 {
+        margin: 0 0 8px;
+        font-size: 22px;
+      }
+
+      .gate p {
+        margin: 0 0 14px;
+        opacity: 0.9;
+        font-size: 14px;
+      }
+
+      .gate-row {
+        display: flex;
+        gap: 10px;
+      }
+
+      .gate input {
+        flex: 1;
+        border: 1px solid rgba(255,255,255,0.3);
+        background: rgba(255,255,255,0.1);
+        color: #fff;
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 16px;
+        outline: none;
+      }
+
+      .gate button {
+        border: 0;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #ff5f9e, #ff8fb9);
+        color: #fff;
+        font-weight: 700;
+        padding: 10px 14px;
+        cursor: pointer;
+      }
+
+      .gate-error {
+        min-height: 18px;
+        margin-top: 10px;
+        color: #ffb6cd;
+        font-size: 13px;
+      }
+
+      .hidden {
+        display: none !important;
+      }
     </style>
   </head>
   <body>
+    <div id="gate" class="gate" role="dialog" aria-modal="true" aria-label="비밀번호 입력">
+      <div class="gate-card">
+        <h2>비밀번호를 입력해줘 💌</h2>
+        <p>우리만 볼 수 있는 페이지로 들어갈게.</p>
+        <form id="gate-form" class="gate-row">
+          <input id="gate-input" type="password" inputmode="numeric" autocomplete="off" placeholder="비밀번호" aria-label="비밀번호" />
+          <button type="submit">열기</button>
+        </form>
+        <div id="gate-error" class="gate-error" aria-live="polite"></div>
+      </div>
+    </div>
+
     <div class="hearts" aria-hidden="true"></div>
 
-    <main class="wrap">
+    <main id="content" class="wrap hidden" aria-hidden="true">
       <section class="card">
         <div class="hero">
           <div class="eyebrow">for my love</div>
@@ -175,19 +254,45 @@
     </main>
 
     <script>
-      const hearts = document.querySelector('.hearts');
-      const count = 24;
-      for (let i = 0; i < count; i++) {
-        const h = document.createElement('span');
-        h.className = 'heart';
-        h.style.left = `${Math.random() * 100}%`;
-        h.style.animationDelay = `${Math.random() * 8}s`;
-        h.style.animationDuration = `${6 + Math.random() * 6}s`;
-        h.style.opacity = `${0.35 + Math.random() * 0.6}`;
-        const size = 8 + Math.random() * 14;
-        h.style.width = `${size}px`;
-        h.style.height = `${size}px`;
-        hearts.appendChild(h);
+      const gate = document.getElementById('gate');
+      const content = document.getElementById('content');
+      const gateForm = document.getElementById('gate-form');
+      const gateInput = document.getElementById('gate-input');
+      const gateError = document.getElementById('gate-error');
+      const PASSWORD = '0110';
+
+      gateForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (gateInput.value === PASSWORD) {
+          gate.classList.add('hidden');
+          content.classList.remove('hidden');
+          content.setAttribute('aria-hidden', 'false');
+          initHearts();
+        } else {
+          gateError.textContent = '비밀번호가 맞지 않아. 다시 입력해줘.';
+          gateInput.value = '';
+          gateInput.focus();
+        }
+      });
+
+      gateInput.focus();
+
+      function initHearts() {
+        const hearts = document.querySelector('.hearts');
+        const count = 24;
+        hearts.innerHTML = '';
+        for (let i = 0; i < count; i++) {
+          const h = document.createElement('span');
+          h.className = 'heart';
+          h.style.left = `${Math.random() * 100}%`;
+          h.style.animationDelay = `${Math.random() * 8}s`;
+          h.style.animationDuration = `${6 + Math.random() * 6}s`;
+          h.style.opacity = `${0.35 + Math.random() * 0.6}`;
+          const size = 8 + Math.random() * 14;
+          h.style.width = `${size}px`;
+          h.style.height = `${size}px`;
+          hearts.appendChild(h);
+        }
       }
     </script>
   </body>
