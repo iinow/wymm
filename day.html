@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>명절 인사</title>
+    <meta name="description" content="따뜻한 명절 인사 페이지" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="따뜻한 명절 인사" />
+    <meta property="og:description" content="소중한 사람들과 함께하는 행복한 명절 되세요." />
+    <meta property="og:url" content="https://iinow.github.io/wymm/day.html" />
+    <style>
+      :root {
+        --bg1: #1a0f0f;
+        --bg2: #4b1518;
+        --gold: #f6d27a;
+        --ivory: #fff8ec;
+        --red: #a6151a;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        display: grid;
+        place-items: center;
+        color: var(--ivory);
+        font-family: "Noto Serif KR", "Apple SD Gothic Neo", serif;
+        background:
+          radial-gradient(circle at 15% 10%, rgba(246,210,122,.16), transparent 35%),
+          radial-gradient(circle at 85% 90%, rgba(246,210,122,.12), transparent 35%),
+          linear-gradient(140deg, var(--bg1), var(--bg2));
+        padding: 18px;
+      }
+
+      .card {
+        width: min(840px, 95vw);
+        border: 1px solid rgba(246, 210, 122, 0.45);
+        border-radius: 22px;
+        background: rgba(255,255,255,0.04);
+        backdrop-filter: blur(6px);
+        box-shadow: 0 20px 60px rgba(0,0,0,.35);
+        overflow: hidden;
+      }
+
+      .top {
+        padding: 34px 22px 20px;
+        text-align: center;
+        background: linear-gradient(to bottom, rgba(246,210,122,.12), rgba(246,210,122,0));
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 7px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(246,210,122,.6);
+        color: var(--gold);
+        font-size: 12px;
+        letter-spacing: .15em;
+      }
+
+      h1 {
+        margin: 14px 0 10px;
+        font-size: clamp(28px, 5vw, 52px);
+        line-height: 1.2;
+        color: #ffe9b3;
+      }
+
+      .sub {
+        margin: 0 auto;
+        max-width: 640px;
+        font-size: clamp(15px, 2.2vw, 20px);
+        opacity: .95;
+      }
+
+      .content {
+        padding: 8px 22px 34px;
+        text-align: center;
+      }
+
+      .wish {
+        margin: 16px auto 20px;
+        max-width: 680px;
+        line-height: 1.9;
+        font-size: clamp(15px, 2vw, 18px);
+        color: #fff4da;
+      }
+
+      .line {
+        width: min(420px, 80%);
+        margin: 18px auto;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(246,210,122,.9), transparent);
+      }
+
+      .stamp {
+        display: inline-block;
+        margin-top: 8px;
+        border: 1px solid rgba(246,210,122,.75);
+        color: var(--gold);
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-size: 13px;
+        letter-spacing: .08em;
+      }
+
+      .lanterns {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .lantern {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: var(--gold);
+        border-radius: 50%;
+        opacity: .5;
+        animation: float 7s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,100% { transform: translateY(0) scale(1); opacity:.35; }
+        50% { transform: translateY(-14px) scale(1.25); opacity:.8; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lanterns" id="lanterns" aria-hidden="true"></div>
+
+    <main class="card">
+      <section class="top">
+        <span class="badge">HAPPY HOLIDAY</span>
+        <h1>새해 복 많이 받으세요</h1>
+        <p class="sub">소중한 분들과 따뜻한 정을 나누는 평안한 명절 되시길 바랍니다.</p>
+      </section>
+
+      <section class="content">
+        <div class="line"></div>
+        <p class="wish">
+          웃음 가득한 시간, 정성 가득한 한 끼, 마음 가득한 안부가
+          오래도록 기억되는 명절이 되길 바랍니다.<br />
+          건강과 행복이 늘 함께하시길 기원합니다.
+        </p>
+        <div class="line"></div>
+        <span class="stamp">WISHING YOU JOY & PEACE</span>
+      </section>
+    </main>
+
+    <script>
+      const wrap = document.getElementById('lanterns');
+      for (let i = 0; i < 28; i++) {
+        const el = document.createElement('span');
+        el.className = 'lantern';
+        el.style.left = `${Math.random() * 100}%`;
+        el.style.top = `${Math.random() * 100}%`;
+        el.style.animationDelay = `${Math.random() * 4}s`;
+        el.style.animationDuration = `${5 + Math.random() * 5}s`;
+        wrap.appendChild(el);
+      }
+    </script>
+  </body>
+</html>
